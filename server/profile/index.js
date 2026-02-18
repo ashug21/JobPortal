@@ -7,7 +7,7 @@ const candidateRoutes = require('./routes/candidate');
 const recruiterRoutes = require('./routes/recruiter');
 const cors = require("cors");
 
-const PORT = process.env.PORT || 5101;
+const PORT = process.env.PORT || 4101;
 
 
 app.use(cors());
