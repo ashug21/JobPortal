@@ -4,7 +4,8 @@ const express = require("express");
 const cors = require("cors");
 const verifyToken = require("./middleware/user");
 
-const authRoutes = require("./routes/user");
+const recruiterRoutes = require("./routes/recruiter");
+const talentRoutes = require('./routes/talent');
 
 const app = express();
 const PORT = process.env.PORT || 4001;
@@ -12,7 +13,8 @@ const PORT = process.env.PORT || 4001;
 app.use(cors());
 app.use(express.json());
 
-app.use("/user", authRoutes);
+app.use("/recruiter", recruiterRoutes);
+app.use("/talent", talentRoutes);
 
 app.get("/", (req, res) => {
   res.send("Auth Service API Working");
