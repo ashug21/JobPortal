@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styles from "./Talent.module.css";
 import Link from "next/link";
 import Navbar from "@/components/Navbar/Navbar";
+import { useRouter } from "next/navigation";
 
 const Talent = () => {
 
@@ -12,6 +13,7 @@ const Talent = () => {
     const [email , setEmail] = useState("");
     const [password , setPassword] = useState("");
   
+      const router = useRouter();
   
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -28,7 +30,8 @@ const Talent = () => {
               phone,
               email , 
               password
-            })
+            }),
+            credentials: "include",  
         });
         const data = await res.json();
 
@@ -43,6 +46,10 @@ const Talent = () => {
         setPassword("");
         setPhone("");
 
+
+        router.replace("/login");
+
+        
       } catch (error) {
         console.log(error.message);
       }

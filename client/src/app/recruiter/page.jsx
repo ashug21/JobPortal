@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import styles from "./recruiter.module.css";
 import Link from "next/link";
 import Navbar from "@/components/Navbar/Navbar";
+import { useRouter } from "next/navigation";
 
 const RecruiterSignup = () => {
 
@@ -12,6 +13,9 @@ const RecruiterSignup = () => {
   const [email , setEmail] = useState("");
   const [password , setPassword] = useState("");
   const [phone , setPhone] = useState("");
+
+
+  const router = useRouter();
 
 
   const handleSubmit = async (e) => {
@@ -30,7 +34,8 @@ const RecruiterSignup = () => {
             phone,
             email , 
             password
-          })
+          }),
+          credentials: "include",  
       });
       const data = await res.json();
 
@@ -45,6 +50,8 @@ const RecruiterSignup = () => {
       setPassword("");
       setPhone("");
       setCompanyName("");
+
+      router.replace("/login");
 
     } catch (error) {
       console.log(error.message);

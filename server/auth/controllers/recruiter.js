@@ -41,16 +41,10 @@ const registerRecruiter = async (req, res) => {
   }
 };
 
+
 const loginRecruiter = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    if (!email || !password) {
-      return res.status(400).json({
-        success: false,
-        message: "Email and password required"
-      });
-    }
 
     const result = await pool.query(
       "SELECT * FROM recruiters_table WHERE email = $1",
@@ -83,13 +77,20 @@ const loginRecruiter = async (req, res) => {
       { expiresIn: "1d" }
     );
 
+    // 🔐 Store in cookie
+    res.cookie("JobPortaltoken", token, {
+      httpOnly: true,
+      secure: false, // true in production (HTTPS)
+      sameSite: "lax",
+      maxAge: 24 * 60 * 60 * 1000
+    });
+
     return res.status(200).json({
       success: true,
-      token
+      message: "Login successful"
     });
 
   } catch (error) {
-    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Server error"
