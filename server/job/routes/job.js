@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const {addJob , fetchJobs} = require('../controllers/job');
+const {fetchAllJobs , addJob} = require("../controllers/job");
+const verifyToken = require('../middleware/job');
 
-router.get('/joblist' , fetchJobs);
+router.post('/add' , verifyToken,  addJob);
 
-router.post('/addjobdetails' , addJob);
-
+router.get('/fetch' , fetchAllJobs);
 
 module.exports = router;

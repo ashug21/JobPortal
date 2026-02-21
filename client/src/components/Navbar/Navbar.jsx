@@ -8,6 +8,7 @@ export default function Navbar() {
 
   const [user, setUser] = useState(null);
   const [role , setRole] = useState("");
+  const [recruiterid , setrecruiterId] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:4000/recruiter/me", {
@@ -22,6 +23,9 @@ export default function Navbar() {
           setUser(data.user);
           setRole(data.user.role);
 
+
+          setrecruiterId(data.user.id);
+          
         }
       })
       .catch(() => {});
@@ -31,6 +35,7 @@ export default function Navbar() {
 function consoledata(){
   console.log(user);
   console.log(role);
+  console.log(recruiterid);
 }
 
 consoledata();
@@ -55,7 +60,7 @@ consoledata();
           </Link>
 
           <ul className={styles.navLinks}>
-            <li><Link href="#">Post a Job</Link></li>
+            <li><Link href="/jobpost">Post a Job</Link></li>
             <li><Link href="#">Jobs</Link></li>
             <li><Link href="#">Salaries</Link></li>
             <li><Link href="#">Resources</Link></li>

@@ -1,0 +1,118 @@
+.container {
+    min-height: 100vh;
+    background: #f6f7fb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+  
+  .card {
+    width: 100%;
+    max-width: 900px;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  }
+  
+  .heading {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1f2937;
+  }
+  
+  .subHeading {
+    font-size: 15px;
+    color: #6b7280;
+    margin-bottom: 30px;
+  }
+  
+  .form {
+    width: 100%;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+  }
+  
+  .field {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .field label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #374151;
+  }
+  
+  .field input,
+  .field select {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    outline: none;
+    transition: border 0.2s ease;
+  }
+  
+  .field input:focus,
+  .field select:focus {
+    border-color: #2563eb;
+  }
+  
+  .fieldFull {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .fieldFull label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: #374151;
+  }
+  
+  .fieldFull input,
+  .fieldFull textarea {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    outline: none;
+    resize: none;
+    transition: border 0.2s ease;
+  }
+  
+  .fieldFull input:focus,
+  .fieldFull textarea:focus {
+    border-color: #2563eb;
+  }
+  
+  .button {
+    margin-top: 30px;
+    width: 100%;
+    padding: 14px;
+    background: #2563eb;
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+  }
+  
+  .button:hover {
+    background: #1d4ed8;
+  }
+  
+  .button:active {
+    transform: scale(0.98);
+  }
