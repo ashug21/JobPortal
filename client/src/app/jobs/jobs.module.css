@@ -1,0 +1,129 @@
+.container {
+    min-height: 100vh;
+    background: #f8fafc;
+    padding: 70px 0;
+  }
+  
+  .wrapper {
+    width: 88%;
+    max-width: 1050px;
+    margin: 0 auto;
+  }
+  
+  .heading {
+    font-size: 34px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 45px;
+    letter-spacing: -0.5px;
+  }
+  
+  .list {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  
+  .card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 30px 32px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.25s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+    border-color: #cbd5e1;
+  }
+  
+  .titleRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .title {
+    font-size: 21px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 4px;
+  }
+  
+  .company {
+    font-size: 14px;
+    color: #475569;
+    font-weight: 500;
+  }
+  
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 13px;
+    color: #64748b;
+    margin: 18px 0 14px 0;
+  }
+  
+  .salary {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 7px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    height: fit-content;
+  }
+  
+  .description {
+    font-size: 14px;
+    color: #334155;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .skillTag {
+    background: #f1f5f9;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #334155;
+  }
+  
+  .bottomRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .applyButton {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .applyButton:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+  }
+  
+  .empty {
+    font-size: 18px;
+    color: #64748b;
+  }

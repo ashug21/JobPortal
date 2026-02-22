@@ -61,8 +61,8 @@ consoledata();
 
           <ul className={styles.navLinks}>
             <li><Link href="/jobpost">Post a Job</Link></li>
-            <li><Link href="#">Jobs</Link></li>
-            <li><Link href="#">Salaries</Link></li>
+            <li><Link href="/jobs">Jobs</Link></li>
+            <li><Link href="#">Candidates Applied</Link></li>
             <li><Link href="#">Resources</Link></li>
           </ul>
         </div>
@@ -102,7 +102,7 @@ consoledata();
           </Link>
 
           <ul className={styles.navLinks}>
-            <li><Link href="#">Jobs</Link></li>
+            <li><Link href="/jobs">Jobs</Link></li>
             <li><Link href="#">Companies</Link></li>
             <li><Link href="#">Salaries</Link></li>
             <li><Link href="#">Resources</Link></li>
@@ -144,7 +144,7 @@ consoledata();
             </Link>
   
             <ul className={styles.navLinks}>
-              <li><Link href="#">Jobs</Link></li>
+              <li><Link href="/jobs">Jobs</Link></li>
               <li><Link href="#">Companies</Link></li>
               <li><Link href="#">Salaries</Link></li>
               <li><Link href="#">Resources</Link></li>
