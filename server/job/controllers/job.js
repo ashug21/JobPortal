@@ -97,36 +97,43 @@ const fetchAllJobs = async (req, res) => {
 
 
 
-const applyForJob = async (req , res) => {
-
+const applyForJob = async (req, res) => {
   try {
-
-    const candidate_id = req.user.id;
+    const talent_id = req.user.id;
     const job_id = req.params.jobId;
 
-    if(req.user.role === "recruiter"){
-      return res.status(401).json({success : false , message : "Only a talent can apply for job"});
+    // Prevent recruiters from applying
+    if (req.user.role !== "talent") {
+      return res.status(403).json({ message: "Only candidates can apply" });
     }
 
+    // Check if already applied
     const existing = await pool.query(
-      "Select * from applications where job_id = $1 and candidate_id = $2" , [job_id , candidate_id]
+      "SELECT * FROM applications WHERE job_id = $1 AND talent_id = $2",
+      [job_id, talent_id]
     );
 
-    if(existing.rows.length > 0){
-      return res.status(401).json({success : false , message : "Already applied to this job role"});
+    if (existing.rows.length > 0) {
+      return res.status(400).json({ message: "Already applied" });
     }
 
-    const result = await pool.query("Insert into applications(job_id , candidate_id) values ($1,$2) returning * ",[job_id , candidate_id]);
+    const result = await pool.query(
+      `INSERT INTO applications (job_id, talent_id)
+       VALUES ($1, $2)
+       RETURNING *`,
+      [job_id, talent_id]
+    );
 
-    return res.status(200).json({success : true , message : "Successfully applied" , application : result.rows[0]});
+    res.status(201).json({
+      success: true,
+      message: "Application submitted",
+      application: result.rows[0]
+    });
 
-  } 
-  
-  catch (error) {
-   return  res.status(500).json({ message: error.message });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-}
-
+};
 
 const getSingleJob = async (req,res) => {
 
@@ -151,5 +158,5 @@ const getSingleJob = async (req,res) => {
 
 
 module.exports = {
-  fetchAllJobs, addJob , getSingleJob
+  fetchAllJobs, addJob , getSingleJob , applyForJob
 };

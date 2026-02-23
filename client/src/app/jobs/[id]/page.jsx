@@ -39,6 +39,30 @@ const JobDetails = () => {
   }
 
 
+  const handleApply = async (jobId) => {
+    try {
+      const res = await fetch(
+        `http://localhost:4200/jobs/apply/${jobId}`,
+        {
+          method: "POST",
+          credentials: "include",
+        }
+      );
+  
+      const data = await res.json();
+  
+      if (!res.ok) {
+        alert(data.message);
+        return;
+      }
+  
+      alert("Application Submitted Successfully");
+  
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 
   return (
     <div>
@@ -73,8 +97,8 @@ const JobDetails = () => {
             </div>
           </div>
 
-          <button className={styles.applyButton}>
-            Confirm Application
+          <button onClick={() => handleApply(job.id)} className={styles.applyButton}>
+            Submit Application
           </button>
         </div>
       </div>
