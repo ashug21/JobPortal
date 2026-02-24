@@ -156,7 +156,39 @@ const getSingleJob = async (req,res) => {
   
 }
 
+// This function returns all jobs added by a single recruiter
+const getRecruiterJobs = async (req, res) => {
+  try {
+    const id = req.user.id;
+
+    if (req.user.role === "talent") {
+      return res.status(403).json({
+        success: false,
+        message: "Talent cannot access recruiter jobs"
+      });
+    }
+
+    const result = await pool.query(
+      "SELECT * FROM job WHERE recruiter_id = $1 ORDER BY id DESC",
+      [id]
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Jobs fetched successfully",
+      jobs: result.rows,
+      total: result.rowCount
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message
+    });
+  }
+};
+
 
 module.exports = {
-  fetchAllJobs, addJob , getSingleJob , applyForJob
+  fetchAllJobs, addJob , getSingleJob , applyForJob , getRecruiterJobs
 };

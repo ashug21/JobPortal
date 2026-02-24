@@ -9,8 +9,8 @@ const PostJob = () => {
   const [description, setDescription] = useState("");
   const [company, setCompany] = useState("");
   const [location, setLocation] = useState("");
-  const [jobtype, setJobType] = useState("");
-  const [workmode, setWorkMode] = useState("");
+  const [jobtype, setJobType] = useState("Full-time");
+  const [workmode, setWorkMode] = useState("Onsite");
   const [salary, setSalary] = useState("");
   const [experienceRequired, setExperienceRequired] = useState("");
   const [skills, setSkills] = useState("");

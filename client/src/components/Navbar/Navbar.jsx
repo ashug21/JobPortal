@@ -32,13 +32,13 @@ export default function Navbar() {
   }, []);
 
 
-function consoledata(){
-  console.log(user);
-  console.log(role);
-  console.log(recruiterid);
-}
+// function consoledata(){
+//   console.log(user);
+//   console.log(role);
+//   console.log(recruiterid);
+// }
 
-consoledata();
+// consoledata();
 
   const handleLogout = async () => {
     await fetch("http://localhost:4000/recruiter/logout", {
@@ -62,8 +62,9 @@ consoledata();
           <ul className={styles.navLinks}>
             <li><Link href="/jobpost">Post a Job</Link></li>
             <li><Link href="/jobs">Jobs</Link></li>
-            <li><Link href="#">Candidates Applied</Link></li>
-            <li><Link href="#">Resources</Link></li>
+            <li><Link href="/myjobs">My Jobs</Link></li>
+            <li><Link href="/candidatesApplied">Candidates Applied</Link></li>
+            
           </ul>
         </div>
 
