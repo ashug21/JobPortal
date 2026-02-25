@@ -135,6 +135,7 @@ const applyForJob = async (req, res) => {
   }
 };
 
+
 const getSingleJob = async (req,res) => {
 
     const {id} = req.params;
@@ -188,7 +189,46 @@ const getRecruiterJobs = async (req, res) => {
   }
 };
 
+const getCandidateApplications = async (req, res) => {
+  try {
+    if (!req.user || req.user.role !== "recruiter") {
+      return res.status(403).json({ message: "Only recruiters allowed" });
+    }
+
+    const recruiterId = req.user.id;
+
+    const result = await pool.query(
+      `
+      SELECT 
+        a.id AS application_id,
+        a.status,
+        a.applied_at,
+        j.id AS job_id,
+        j.title AS job_title,
+        t.full_name,
+        t.email,
+        t.phone
+      FROM applications a
+      JOIN job j ON a.job_id = j.id
+      JOIN talent_table t ON a.talent_id = t.id
+      WHERE j.recruiter_id = $1
+      ORDER BY a.applied_at DESC
+      `,
+      [recruiterId]
+    );
+
+    return res.status(200).json({
+      success: true,
+      total: result.rowCount,
+      applications: result.rows
+    });
+
+  } catch (error) {
+    console.log("APPLICATION FETCH ERROR:", error);
+    return res.status(500).json({ message: error.message });
+  }
+};
 
 module.exports = {
-  fetchAllJobs, addJob , getSingleJob , applyForJob , getRecruiterJobs
+  fetchAllJobs, addJob , getSingleJob , applyForJob , getRecruiterJobs , getCandidateApplications
 };

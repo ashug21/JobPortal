@@ -43,9 +43,9 @@ const Jobs = () => {
           {data.length === 0 ? (
             <p className={styles.empty}>Loading Jobs...</p>
           ) : (
-            <div className={styles.list}>
+            <div className={styles.list} >
               {data.map((job) => (
-                <div key={job.id} className={styles.card}>
+                <div key={job.id} className={styles.card}    onClick={() => router.push(`/jobs/${job.id}`)}>
                   <div className={styles.titleRow}>
                     <div>
                       <h2 className={styles.title}>{job.title}</h2>

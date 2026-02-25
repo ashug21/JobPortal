@@ -85,7 +85,7 @@ const MyJobs = () => {
           <div className={styles.jobGrid}>
             {jobs.length === 0 ? (
               <div className={styles.emptyState}>
-                <h3>No Jobs Posted Yet</h3>
+                <h3>Loading...</h3>
                 <p>Start posting opportunities to attract candidates.</p>
               </div>
             ) : (
