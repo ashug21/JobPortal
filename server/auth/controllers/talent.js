@@ -98,4 +98,32 @@ const loginTalent = async (req, res) => {
   }
 };
 
-module.exports = { registerTalent, loginTalent };
+
+const getTalentDetails = async(req,res) => {
+
+
+try {
+  const id = req.user.id;
+
+  if(req.user.role === "recruiter"){
+    return res.status(401).json({success : false , message : "Only Talent can see thier profile"});
+  }
+
+  const result = await pool.query(
+    `SELECT * FROM talent_table WHERE id = $1`,
+    [id]
+  );
+
+  if(result.rows.length === 0){
+    return res.status(404).json({success : false , message : "No Records found"});
+  }
+
+  return res.status(201).json({success : true , message : "Details fetched Successfully" , talent : result.rows[0]});
+  
+} 
+catch (error) {
+  return res.status(500).json({ success: false,  message: "Server error" });
+  }
+}
+
+module.exports = { registerTalent, loginTalent , getTalentDetails };

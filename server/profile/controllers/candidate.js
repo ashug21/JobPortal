@@ -1,73 +1,35 @@
 const pool = require('../lib/db');
 
 
-const createCandidateProfile = async (req,res) => {
+const candidateProfile = async(req,res) => {
 
     try {
-        const userId = req.user.id;
+        const talentid = req.user.id;
 
-        const {full_name , phone , location , skills , experience_years} = req.body;
-
-        if(!full_name || !phone || !location || !skills || !experience_years){
-            return res.status(400).json({success : false , message : "All fields are required"});
-        }
-
-        const existing = await pool.query("Select * from candidates where user_id = $1" , [userId]);
-
-       
-    if (existing.rows.length > 0) {
-        return res.status(400).json({success: false, message: "Profile already exists"}); 
+    if(req.user.role === "recruiter"){
+        return res.status(401).json({success : false , message : "Recruiter can't access talent's profile"});
     }
-  
-        await pool.query("insert into candidates (full_name , phone , location, skills , experience_years) VALUES ($1 , $2 , $3 , $4 , $5 , $6) returning * ", [userId , full_name , phone , location , skills , experience_years]);
 
+    const {age , gender , headline , bio , skills , experience , education ,  linkedin_url ,  github_url ,   portfolio_url , location , certification , language} = req.body;
 
-        return res.status(201).json({
+    const result = await pool.query(`Insert into talent_profile (talent_id , age , gender , headline , bio , skills , experience , education ,  linkedin_url ,  github_url ,   portfolio_url , location , certification , language) 
+        values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *`,
+        [talentid, age , gender , headline , bio , skills , experience , education ,  linkedin_url ,  github_url ,   portfolio_url , location , certification , language])    
+   
+   
+       return res.status(201).json({
             success: true,
+            message: "Profile Updated",
             profile: result.rows[0]
           });
-      
-
-    } 
-    catch (error) {
+    }
     
-        console.log(error);
-    
-        return res.status(500).json({ success: false, message: "Server error" });
-  }
+        catch (error) {
+        
+        return res.status(500).json({success : false , message : error.message });
+    }
 }
 
-
-const getMyCandidateProfile = async (req, res) => {
-    try {
-      const userId = req.user.id;
-  
-      const result = await pool.query(
-        "SELECT * FROM candidates WHERE user_id = $1",
-        [userId]
-      );
-  
-      if (result.rows.length === 0) {
-        return res.status(404).json({
-          success: false,
-          message: "Profile not found"
-        });
-      }
-  
-      return res.json({
-        success: true,
-        profile: result.rows[0]
-      });
-  
-    } catch (error) {
-      return res.status(500).json({
-        success: false,
-        message: "Server error"
-      });
-    }
-  };
-
-  
 module.exports = {
-  createCandidateProfile , getMyCandidateProfile
+    candidateProfile
 }

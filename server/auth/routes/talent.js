@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const {registerTalent , loginTalent} = require('../controllers/talent');
+const {registerTalent , loginTalent , getTalentDetails} = require('../controllers/talent');
 const verifyToken = require("../middleware/user");
 
 router.post('/register' , registerTalent);
@@ -24,6 +24,7 @@ router.post('/login' , loginTalent);
     });
   });
 
+  router.get('/talentDetails' , verifyToken ,getTalentDetails);
 
 
 module.exports = router;

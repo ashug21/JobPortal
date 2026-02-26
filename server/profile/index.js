@@ -3,8 +3,8 @@ dotenv.config();
 
 const express = require("express");
 const app = express();
-const candidateRoutes = require('./routes/candidate');
-const recruiterRoutes = require('./routes/recruiter');
+const candidateRoutes = require('./routes/CandidateRoutes');
+// const recruiterRoutes = require('./routes/recruiter');
 const cors = require("cors");
 
 const PORT = process.env.PORT || 4101;
@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/candidate' , candidateRoutes);
-app.use('/recruiter' , recruiterRoutes);
+// app.use('/recruiter' , recruiterRoutes);
 
 
 app.get("/" , (req,res) => {
@@ -22,4 +22,4 @@ app.get("/" , (req,res) => {
 });
 
 
-app.listen(PORT , () => console.log("profile server running"));
+app.listen(PORT , () => console.log(`server started at ${PORT}`));

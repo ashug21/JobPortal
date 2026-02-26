@@ -1,0 +1,126 @@
+.wrapper {
+    background: #ffffff;
+    min-height: 100vh;
+    padding: 60px 20px;
+  }
+  
+  .container {
+    max-width: 950px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 50px;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+  }
+  
+  .title {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #111;
+  }
+  
+  .subtitle {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 40px;
+  }
+  
+  .section {
+    margin-bottom: 50px;
+  }
+  
+  .section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #222;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+  }
+  
+  .inputGroup {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .inputGroupFull {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 25px;
+  }
+  
+  .inputGroup label,
+  .inputGroupFull label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+  }
+  
+  .inputGroup input,
+  .inputGroup select,
+  .inputGroup textarea,
+  .inputGroupFull input,
+  .inputGroupFull select,
+  .inputGroupFull textarea {
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    outline: none;
+    background: #fff;
+  }
+  
+  .inputGroup input:focus,
+  .inputGroup select:focus,
+  .inputGroup textarea:focus,
+  .inputGroupFull input:focus,
+  .inputGroupFull select:focus,
+  .inputGroupFull textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+  }
+  
+  .inputGroup input:disabled {
+    background: #f5f5f5;
+    cursor: not-allowed;
+  }
+  
+  .inputGroupFull textarea {
+    resize: none;
+  }
+  
+  .buttonWrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .saveBtn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  
+  .saveBtn:hover {
+    background: #1e4ed8;
+  }

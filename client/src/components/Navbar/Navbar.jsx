@@ -5,175 +5,192 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Navbar() {
-
   const [user, setUser] = useState(null);
-  const [role , setRole] = useState("");
-  const [recruiterid , setrecruiterId] = useState(null);
+  const [role, setRole] = useState("");
+  const [recruiterid, setrecruiterId] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:4000/recruiter/me", {
-      credentials: "include"
+      credentials: "include",
     })
-      .then(res => {
+      .then((res) => {
         if (!res.ok) return null;
         return res.json();
       })
-      .then(data => {
+      .then((data) => {
         if (data && data.success) {
           setUser(data.user);
           setRole(data.user.role);
 
-
           setrecruiterId(data.user.id);
-          
         }
       })
       .catch(() => {});
   }, []);
 
+  // function consoledata(){
+  //   console.log(user);
+  //   console.log(role);
+  //   console.log(recruiterid);
+  // }
 
-// function consoledata(){
-//   console.log(user);
-//   console.log(role);
-//   console.log(recruiterid);
-// }
-
-// consoledata();
+  // consoledata();
 
   const handleLogout = async () => {
     await fetch("http://localhost:4000/recruiter/logout", {
       method: "POST",
-      credentials: "include"
+      credentials: "include",
     });
     setUser(null);
   };
 
-
   if (user && role === "recruiter") {
     return (
       <nav className={styles.navbar}>
-      <div className={styles.container}>
-        
-        <div className={styles.left}>
-          <Link href="/" className={styles.logo}>
-            HirePro
-          </Link>
+        <div className={styles.container}>
+          <div className={styles.left}>
+            <Link href="/" className={styles.logo}>
+              HirePro
+            </Link>
 
-          <ul className={styles.navLinks}>
-            <li><Link href="/jobpost">Post a Job</Link></li>
-            <li><Link href="/jobs">Jobs</Link></li>
-            <li><Link href="/myjobs">My Jobs</Link></li>
-            <li><Link href="/candidatesApplied">Candidates Applied</Link></li>
-            
-          </ul>
-        </div>
-
-        <div className={styles.right}>
-          <div className={styles.searchBox}>
-            <input
-              type="text"
-              placeholder="Search jobs, companies..."
-            />
+            <ul className={styles.navLinks}>
+              <li>
+                <Link href="/jobpost">Post a Job</Link>
+              </li>
+              <li>
+                <Link href="/jobs">Jobs</Link>
+              </li>
+              <li>
+                <Link href="/myjobs">My Jobs</Link>
+              </li>
+              <li>
+                <Link href="/candidatesApplied">Candidates Applied</Link>
+              </li>
+            </ul>
           </div>
 
-          <Link onClick={handleLogout} href="/choose" className={styles.signup}>
-          Logout
-          </Link>
+          <div className={styles.right}>
+            <div className={styles.searchBox}>
+              <input type="text" placeholder="Search jobs, companies..." />
+            </div>
 
-          <Link href="/post-job" className={styles.postJob}>
-            My Profile
-          </Link>
+            <Link
+              onClick={handleLogout}
+              href="/choose"
+              className={styles.signup}
+            >
+              Logout
+            </Link>
 
-         
+            <Link href="/post-job" className={styles.postJob}>
+              My Profile
+            </Link>
+          </div>
         </div>
-
-      </div>
-    </nav>
+      </nav>
     );
   }
 
   if (user && role === "talent") {
     return (
       <nav className={styles.navbar}>
-      <div className={styles.container}>
-        
-        <div className={styles.left}>
-          <Link href="/" className={styles.logo}>
-            HirePro
-          </Link>
-
-          <ul className={styles.navLinks}>
-            <li><Link href="/jobs">Jobs</Link></li>
-            <li><Link href="#">Companies</Link></li>
-            <li><Link href="#">Salaries</Link></li>
-            <li><Link href="#">Resources</Link></li>
-          </ul>
-        </div>
-
-        <div className={styles.right}>
-          <div className={styles.searchBox}>
-            <input
-              type="text"
-              placeholder="Search jobs, companies..."
-            />
-          </div>
-
-          <Link onClick={handleLogout} href="/choose" className={styles.signup}>
-          Logout
-          </Link>
-
-          <Link href="/post-job" className={styles.postJob}>
-            My Profile
-          </Link>
-
-         
-        </div>
-
-      </div>
-    </nav>
-    );
-  }
-
-  else{
-    return (
-      <nav className={styles.navbar}>
         <div className={styles.container}>
-          
           <div className={styles.left}>
             <Link href="/" className={styles.logo}>
               HirePro
             </Link>
-  
+
             <ul className={styles.navLinks}>
-              <li><Link href="/jobs">Jobs</Link></li>
-              <li><Link href="#">Companies</Link></li>
-              <li><Link href="#">Salaries</Link></li>
-              <li><Link href="#">Resources</Link></li>
+              <li>
+                <Link href="/jobs">Jobs</Link>
+              </li>
+              <li>
+                <Link href="#">Companies</Link>
+              </li>
+              <li>
+                <Link href="#">Salaries</Link>
+              </li>
+              <li>
+                <Link href="#">Resources</Link>
+              </li>
             </ul>
           </div>
-  
+
           <div className={styles.right}>
             <div className={styles.searchBox}>
-              <input
-                type="text"
-                placeholder="Search jobs, companies..."
-              />
+              <input type="text" placeholder="Search jobs, companies..." />
             </div>
-  
-            
-  
+
+            <Link
+              onClick={handleLogout}
+              href="/choose"
+              className={styles.signup}
+            >
+              Logout
+            </Link>
+
+            <div className={styles.profileWrapper}>
+              <button className={styles.postJob}>My Profile</button>
+
+              <div className={styles.dropdown}>
+                <Link
+                  href="/Profile/TalentProfile"
+                  className={styles.dropdownItem}
+                >
+                  View Profile
+                </Link>
+                <Link
+                  href="/Profile/EditTalentProfile"
+                  className={styles.dropdownItem}
+                >
+                  Edit Profile
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
+  } else {
+    return (
+      <nav className={styles.navbar}>
+        <div className={styles.container}>
+          <div className={styles.left}>
+            <Link href="/" className={styles.logo}>
+              HirePro
+            </Link>
+
+            <ul className={styles.navLinks}>
+              <li>
+                <Link href="/jobs">Jobs</Link>
+              </li>
+              <li>
+                <Link href="#">Companies</Link>
+              </li>
+              <li>
+                <Link href="#">Salaries</Link>
+              </li>
+              <li>
+                <Link href="#">Resources</Link>
+              </li>
+            </ul>
+          </div>
+
+          <div className={styles.right}>
+            <div className={styles.searchBox}>
+              <input type="text" placeholder="Search jobs, companies..." />
+            </div>
+
             <Link href="/choose" className={styles.signup}>
               Sign Up
             </Link>
-  
+
             <Link href="/login" className={styles.postJob}>
               Login
             </Link>
           </div>
-  
         </div>
       </nav>
     );
   }
- 
 }

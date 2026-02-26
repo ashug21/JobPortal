@@ -19,9 +19,13 @@ router.post("/logout", (req, res) => {
     res.json({
       success: true,
       user: req.user,
-      role : req.user.role
+      role : req.user.role,
+
     });
   });
+
+
+
 
 
 module.exports = router;
